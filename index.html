@@ -6,35 +6,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="App for calculate ohm's law ">
-    <title>Ohm law X</title>
+    <title>Ohm's Law X | Calculator</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
-    <header id="header" class="header">
-        <h1 class="header__title-app">Ohm Law X</h1>
-    </header>
-    <div class="opcions" id="opcions">
-        <h2 id="title_question">What do you want calculate?</h2>
-        <ul>
-            <li>
-                <input type="radio" id="check">
-                <label for="" class="opcion_check">Voltaje
-                </label>
-            </li>
-            <li>
-                <input type="radio" id="check">
-                <label for="" class="opcion_check">Current
-                </label>
-            </li>
-            <li>
-                <input type="radio" id="check">
-                <label for="" class="opcion_check">Resistance
-                </label>
-            </li>
-        </ul>
+    <div class="main__container_body">
+        <header id="header" class="header">
+            <h1 class="header__title-app">Ohm's Law X</h1>
+        </header>
+        <main class="main__container">
+            <div class="opcions__container" id="opcions">
+                <h2 id="title_question">What do you want to calculate?</h2>
+                <ul class="menu__options">
+                    <li class="item_option">
+                        <input type="radio" id="voltaje_option" class="radio_option focus_radio" checked>
+                        <label class="label_input_option" for="voltaje_option" class="label-option">V
+                        </label>
+                    </li>
+                    <li class="item_option">
+                        <input type="radio" id="current_option" class="radio_option">
+                        <label class="label_input_option" for="current_option" class="label-option">I
+                        </label>
+                    </li>
+                    <li class="item_option">
+                        <input type="radio" id="resistance_option" class="radio_option">
+                        <label class="label_input_option" for="resistance_option" class="label-option">Ω
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <div class="container_values">
+                <label class="label_input focus_label" for="first_value_input">Curret</label>
+                <div class="value-container">
+                    <input type="number" autofocus id="first_value_input" class="input_value focus_input_value">
+                    <select id="first_units_list" class="list_units focus_input_value">
+                        <option value="nA">nA</option>
+                        <option selected value="mA">mA</option>
+                        <option selected value="A">A</option>
+                        <option value="kA">kA</option>
+                        <option value="MA">MA</option>
+                    </select>
+                </div>
+            </div>
+            <div class="container_values">
+                <label class="label_input " for="second_value_input">Resistance</label>
+                <div class="value-container">
+                    <input type="number" id="second_value_input" class="input_value">
+                    <select id="second_units_list" class="list_units">
+                        <option value="nOhms">nΩ</option>
+                        <option value="mOhms">mΩ</option>
+                        <option selected value="Ohms">Ω</option>
+                        <option value="kOhms">kΩ</option>
+                        <option value="MOhms">MΩ</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="container__result">
+                <h2 id="result" class="result">result</h2>
+            </div>
+        </main>
     </div>
-    
+    <footer class="footer" id="footer">
+
+    </footer>
 </body>
 
 </html>
