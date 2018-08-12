@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="App for calculate ohm's law by Xizuth Inc">
+    <meta name="author" content="Develop by Xizuth Inc">
     <title>Ohm's Law X | Calculator</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="apple-touch-startup-image" href="icon/android-icon-192x192.png">
     <link rel="apple-touch-icon" sizes="57x57" href="icon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="icon/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="icon/apple-icon-72x72.png">
@@ -26,12 +28,17 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="icon/ms-icon-144x144.png">
     <meta name="theme-color" content="#D32F2F">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
 <!-- TODO: minificar-->
 <!-- TODO: prefijos CSS-->
 <!-- TODO: meta-->
+<!-- TODO: cambiar el texto de los placeholder-->
+<!-- TODO: cambiar el tamaño de la letra de los label si tienen el focos o no como en el cel-->
 <!-- TODO: opengraph-->
 <!-- TODO: twetter card-->
+<!-- TODO: agregar la imagen de la formula con una ventana encima-->
+<!-- TODO: agregar atributo de para no tradusca -->
 <body>
     <div class="main__container_body">
         <header id="header" class="header">
@@ -40,59 +47,67 @@
         <main class="main__container">
             <div class="opcions__container" id="opcions">
                 <h2 id="title_question">What do you want to calculate?</h2>
-                <ul class="menu__options">
+                <ul class="menu__options" id="menu-option">
                     <li class="item_option">
-                        <input type="radio" id="voltaje_option" class="radio_option focus_radio" checked>
-                        <label class="label_input_option" for="voltaje_option" class="label-option">V
+                        <input type="radio" id="voltage_option" class="radio_option focus_radio" name="option" checked>
+                        <label class="label_input_option" for="voltage_option" class="label-option">V
                         </label>
                     </li>
                     <li class="item_option">
-                        <input type="radio" id="current_option" class="radio_option">
+                        <input type="radio" id="current_option" class="radio_option" name="option" >
                         <label class="label_input_option" for="current_option" class="label-option">I
                         </label>
                     </li>
                     <li class="item_option">
-                        <input type="radio" id="resistance_option" class="radio_option">
+                        <input type="radio" id="resistance_option" class="radio_option" name="option" >
                         <label class="label_input_option" for="resistance_option" class="label-option">Ω
                         </label>
                     </li>
                 </ul>
             </div>
-            <div class="container_values">
-                <label class="label_input focus_label" for="first_value_input">Curret</label>
-                <div class="value-container">
-                    <input type="number" autofocus id="first_value_input" class="input_value focus_input_value">
-                    <select id="first_units_list" class="list_units focus_input_value">
-                        <option value="nA">nA</option>
-                        <option selected value="mA">mA</option>
-                        <option selected value="A">A</option>
-                        <option value="kA">kA</option>
-                        <option value="MA">MA</option>
-                    </select>
+            <div id="formulario">
+                <div class="container_values">
+                    <label id="label_option_one" class="label_input focus_label" for="first_value_input">Current</label>
+                    <div class="value-container" id="container_inputs_one">
+                        <input type="number" autofocus id="first_value_input" class="input_value focus_input_value">
+                        <select id="first_units_list" class="list_units focus_input_value">
+                            <option value="nA">nA</option>
+                            <option value="uA">uA</option>
+                            <option selected value="mA">mA</option>
+                            <option selected value="A">A</option>
+                            <option value="kA">kA</option>
+                            <option value="MA">MA</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="container_values">
-                <label class="label_input " for="second_value_input">Resistance</label>
-                <div class="value-container">
-                    <input type="number" id="second_value_input" class="input_value">
-                    <select id="second_units_list" class="list_units">
-                        <option value="nOhms">nΩ</option>
-                        <option value="mOhms">mΩ</option>
-                        <option selected value="Ohms">Ω</option>
-                        <option value="kOhms">kΩ</option>
-                        <option value="MOhms">MΩ</option>
-                    </select>
+                <div class="container_values" >
+                    <label class="label_input " for="second_value_input" id="label_option_two">Resistance</label>
+                    <div class="value-container" id="container_inputs_second">
+                        <input type="number" id="second_value_input" class="input_value">
+                        <select id="second_units_list" class="list_units">
+                            <option value="nOhms">nΩ</option>
+                            <option value="uOhms">uΩ</option>
+                            <option value="mOhms">mΩ</option>
+                            <option selected value="Ohms">Ω</option>
+                            <option value="kOhms">kΩ</option>
+                            <option value="MOhms">MΩ</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
             <div class="container__result">
-                <h2 id="result" class="result">0</h2>
+                <h2 id="result" class="result">-</h2>
             </div>
         </main>
     </div>
     <footer class="footer" id="footer">
-
+        <a href="https://play.google.com/store/apps/details?id=com.xizuth.ohmlawcalcu" target="_blanck">
+            <img src="assets/button_play.png" alt="play store download ohm law xizuth">
+        </a>
     </footer>
+
+    <script async src="js/main.js"></script>
 </body>
 
 </html>
