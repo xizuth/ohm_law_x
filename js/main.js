@@ -1,11 +1,11 @@
 
-const notacion = {
+const notation = {
     "nano": {
-        "name": 'n',
+        "name": "n",
         "value": 0.000000001
     },
     "micro": {
-        "name": 'u',
+        "name": "u",
         "value": 0.000001
     },
     "mili": {
@@ -13,7 +13,7 @@ const notacion = {
         "value": 0.001
     },
     "unit": {
-        "name": "unit",
+        "name": "",
         "value": 1
     },
     "kilo": {
@@ -23,7 +23,8 @@ const notacion = {
     "mega": {
         "name": "M",
         "value": 1000000
-    }
+    },
+    "allValues": ['n', 'u', 'm', '', 'k', 'M']
 };
 
 const units = {
@@ -38,7 +39,8 @@ const units = {
     "resistance": {
         "name": "Resistance",
         "simbol": "Ω"
-    }
+    },
+    "allSimbol": ["V", "A", "Ω"]
 };
 
 /**
@@ -61,9 +63,10 @@ let calculateResistance = (voltage = 0.0, current = 0.0) => {
 
 let selectOption = (e) => {
 
-    if (e.key === '-' || (e.key === '.')) { //FIX: si lo presi
+    if (e.key === '-' || (e.key === '.')) {
         return;
     }
+
 
     focusInput(e);
 
@@ -74,12 +77,18 @@ let selectOption = (e) => {
 
     if (option === 0 || document.getElementById('voltage_option').checked) {
         loadNameLabel(units.current.name, units.resistance.name);
+        loadListUnit(units.current.simbol,getListNotation().firstList);
+        loadListUnit(units.resistance.simbol,getListNotation().secondList);
         setResutl(0);
     } else if (option === 1 || document.getElementById('current_option').checked) {
         loadNameLabel(units.voltage.name, units.resistance.name);
+        loadListUnit(units.voltage.simbol,getListNotation().firstList);
+        loadListUnit(units.resistance.simbol,getListNotation().secondList);
         setResutl(1);
     } else if (option === 2 || document.getElementById('resistance_option').checked) {
         loadNameLabel(units.voltage.name, units.current.name);
+        loadListUnit(units.voltage.simbol,getListNotation().firstList);
+        loadListUnit(units.current.simbol,getListNotation().secondList);
         setResutl(2);
     }
 
@@ -158,14 +167,15 @@ let setResutl = (option = 0) => {
     let first = parseFloat(valueOne.value);
     let second = parseFloat(valueTwo.value);
 
-    if (isNaN(first)) {
-        first = 0;
-    } if (isNaN(second)) {
-        second = 0;
-    }
+    first = toZero(first);
+    second = toZero(second);
 
     let result = 0.0;
     let unit = '';
+
+    first = roundValue(first, getListNotation().firstList);
+    second = roundValue(second, getListNotation().secondList);
+
     if (option === 0) {
         result = calculateVoltage(first, second);
         unit = units.voltage.simbol;
@@ -180,10 +190,16 @@ let setResutl = (option = 0) => {
     if (result === Infinity || (second === 0 && !document.getElementById('voltage_option').checked)) {
         resultLabel.innerText = Infinity;
     } else {
-        resultLabel.innerText = `${formatNumber(result)} ${unit}`;
+        result = getResultWithNotation(result);
+
+        resultLabel.innerText = `${formatNumber(result.value)} ${result.notation}${unit}`;
     }
 
 };
+
+let toZero = (number) => {
+    return isNaN(number) ? 0.0 : number;
+}
 
 let formatNumber = (number = 0.0) => {
     if (number === 0 || isNaN(number)) {
@@ -199,8 +215,91 @@ let formatNumber = (number = 0.0) => {
     }
 }
 
-let getNotation = (value = 0) =>{
+let getListNotation = () => {
+    let listOne = document.getElementById('first_units_list');
+    let secondList = document.getElementById('second_units_list');
+
+    return {
+        firstList: listOne,
+        secondList: secondList
+    }
+}
+
+let roundValue = (value = 0.0, notationList) => {
+    let index = notationList.selectedIndex;
+    if (index === 1) return value *= notation.micro.value;
+    if (index === 2) return value *= notation.mili.value;
+    if (index === 3) return value *= notation.unit.value;
+    if (index === 4) return value *= notation.kilo.value;
+    if (index === 5) return value *= notation.mega.value;
+}
+
+let loadListUnit = (simbol, select) => {
+
+    select = removeAllOptions(select);
+
+    for (let index = 0; index < notation.allValues.length; index++) {
+        let optionNew = document.createElement('option');
+        optionNew.innerText = notation.allValues[index]+simbol;
+        if(notation.allValues[index] === notation.unit.name){
+            optionNew.setAttribute('selected','')
+        }
+        select.add(optionNew)
+    }
+
+    return select;
+}
+
+let removeAllOptions = (select) => {
     
+    while(select.length !== 0){
+        select.remove(0);
+    }
+
+    return select;
+}
+
+let getResultWithNotation = (value = 0.0) => {
+    let flag = false;
+    let notationSelect = "";
+    if (value < 0) {
+        value *= -1;
+        flag = true;
+    }
+
+    if (value < notation.nano.value) {
+        value /= notation.nano.value;
+        notationSelect += notation.nano.name;
+    }
+    if (value >= notation.micro.value && value < notation.mili.value) {
+        value /= notation.micro.value;
+        notationSelect += notation.micro.name;
+    }
+    if (value >= notation.mili.value && value < notation.unit.value) {
+        value /= notation.mili.value;
+        notationSelect += notation.mili.name;
+    }
+    if (value >= notation.unit.value && value < notation.kilo.value) {
+        value /= notation.unit.value;
+        notationSelect += notation.unit.name;
+    }
+    if (value >= notation.kilo.value && value < notation.mega.value) {
+        value /= notation.kilo.value;
+        notationSelect += notation.kilo.name;
+    }
+    if (value >= notation.mega.value) {
+        value /= notation.mega.value;
+        notationSelect += notation.mega.name;
+    }
+
+    if (flag) {
+        value *= -1;
+    }
+
+    return {
+        value,
+        notation: notationSelect
+    }
 }
 /**
  * Metodó auto ejecutable
@@ -220,7 +319,8 @@ let getNotation = (value = 0) =>{
     d.getElementById('container_inputs_second').addEventListener('click', focusInput)
 
     let listOne = d.getElementById('first_units_list');
-    listOne.addEventListener('change', (e)=>{
+    listOne.addEventListener('change', (e) => {
         selectOption();
     });
+
 })(document);
