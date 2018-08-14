@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: http://ogp.me/ns#">
 
 <head>
     <meta charset="UTF-8">
+    <title>Ohm's Law X | Calculator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="http://xizuth/ohms-law">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="App for calculate ohm's law by Xizuth Inc">
+    <meta name="abstract" content="Ohm's law calculator">
     <meta name="author" content="Develop by Xizuth Inc">
-    <title>Ohm's Law X | Calculator</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style-dist.css">
     <link rel="apple-touch-startup-image" href="icon/android-icon-192x192.png">
     <link rel="apple-touch-icon" sizes="57x57" href="icon/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="icon/apple-icon-60x60.png">
@@ -29,39 +31,52 @@
     <meta name="msapplication-TileImage" content="icon/ms-icon-144x144.png">
     <meta name="theme-color" content="#D32F2F">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta property="og:url" content="http://www.xizuth.com/ohms-law/" />
+    <meta property="og:type" content="app web" />
+    <meta property="og:title" content="Ohm's law Calculator | Xizuth Inc" />
+    <meta property="og:description" content="Calculator for ohm's law" />
+    <meta property="og:image" content="http://www.xizuth.com/ohms-law/assets/banner.png" />
+    <meta property="og:image:alt" content="Ohm's law xizuth banner app" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="600" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@jalm_x" />
+    <meta name="twitter:title" content="Ohm's law Calculator | Xizuth Inc" />
+    <meta name="twitter:description" content="Calculator for ohm's law" />
+    <meta name="twitter:image" content="http://www.xizuth.com/ohms-law/assets/banner.png" />
+
 </head>
 <!-- TODO: minificar-->
 <!-- TODO: prefijos CSS-->
-<!-- TODO: meta-->
-<!-- TODO: cambiar el tamaño de la letra de los label si tienen el focos o no como en el cel-->
-<!-- TODO: opengraph-->
-<!-- TODO: twetter card-->
-<!-- TODO: agregar la imagen de la formula con una ventana encima-->
-<!-- TODO: agregar atributo de para no tradusca -->
-<!-- TODO: el punto decimal cuando no esta solito -->
+<!-- TODO: FUTURO cambiar el tamaño de la letra de los label si tienen el focos o no como en el cel-->
+<!-- TODO: FUTURO agregar la imagen de la formula con una ventana encima-->
+<!-- TODO: FUTURO tratar con numero muy grandes o muy pequeños -->
+<!-- //TODO: no jala micro por ser 1e-9 -->
 
 <body>
-    <div class="main__container_body">
-        <header id="header" class="header">
-            <h1 class="header__title-app">Ohm's Law X</h1>
+    <div class="main__container_body" translate="no">
+        <header id="header" class="header" itemscope itemtype="http://schema.org/WebApplication">
+            <h1 translate="no" class="header__title-app" itemtype="Text" itemprop="applicationSuite">Ohm's Law X</h1>
         </header>
-        <main class="main__container">
+        <main class="main__container" translate="no">
             <div class="opcions__container" id="opcions">
                 <h2 id="title_question">What do you want to calculate?</h2>
                 <ul class="menu__options" id="menu-option">
                     <li class="item_option">
                         <input type="radio" id="voltage_option" class="radio_option focus_radio" name="option" checked>
-                        <label class="label_input_option" for="voltage_option" class="label-option">V
+                        <label class="label_input_option" for="voltage_option" class="label-option" translate="no">V
                         </label>
                     </li>
                     <li class="item_option">
                         <input type="radio" id="current_option" class="radio_option" name="option">
-                        <label class="label_input_option" for="current_option" class="label-option">I
+                        <label class="label_input_option" for="current_option" class="label-option" translate="no">I
                         </label>
                     </li>
                     <li class="item_option">
                         <input type="radio" id="resistance_option" class="radio_option" name="option">
-                        <label class="label_input_option" for="resistance_option" class="label-option">Ω
+                        <label class="label_input_option" for="resistance_option" class="label-option" translate="no">Ω
                         </label>
                     </li>
                 </ul>
@@ -71,43 +86,68 @@
                     <label id="label_option_one" class="label_input focus_label" for="first_value_input">Current</label>
                     <div class="value-container" id="container_inputs_one">
                         <input type="number" autofocus id="first_value_input" class="input_value focus_input_value">
-                        <select id="first_units_list" class="list_units focus_input_value">
-                            <option value="nA">nA</option>
-                            <option value="uA">uA</option>
-                            <option value="mA">mA</option>
-                            <option selected value="A">A</option>
-                            <option value="kA">kA</option>
-                            <option value="MA">MA</option>
+                        <select id="first_units_list" class="list_units focus_input_value" translate="no">
+                            <option translate="no" value="nA">nA</option>
+                            <option translate="no" value="uA">uA</option>
+                            <option translate="no" value="mA">mA</option>
+                            <option translate="no" selected value="A">A</option>
+                            <option translate="no" value="kA">kA</option>
+                            <option translate="no" value="MA">MA</option>
                         </select>
                     </div>
                 </div>
                 <div class="container_values">
-                    <label class="label_input " for="second_value_input" id="label_option_two">Resistance</label>
+                    <label class="label_input " for="second_value_input" id="label_option_two" translate="no">Resistance</label>
                     <div class="value-container" id="container_inputs_second">
                         <input type="number" id="second_value_input" class="input_value">
-                        <select id="second_units_list" class="list_units">
-                            <option value="nOhms">nΩ</option>
-                            <option value="uOhms">uΩ</option>
-                            <option value="mOhms">mΩ</option>
-                            <option selected value="Ohms">Ω</option>
-                            <option value="kOhms">kΩ</option>
-                            <option value="MOhms">MΩ</option>
+                        <select id="second_units_list" class="list_units" translate="no">
+                            <option translate="no" value="nOhms">nΩ</option>
+                            <option translate="no" value="uOhms">uΩ</option>
+                            <option translate="no" value="mOhms">mΩ</option>
+                            <option translate="no" selected value="Ohms">Ω</option>
+                            <option translate="no" value="kOhms">kΩ</option>
+                            <option translate="no" value="MOhms">MΩ</option>
                         </select>
                     </div>
                 </div>
             </div>
 
             <div class="container__result">
-                <h2 id="result" class="result">-</h2>
+                <h2 id="result" class="result" translate="no">-</h2>
             </div>
+
         </main>
     </div>
     <footer class="footer" id="footer">
-        <a href="https://play.google.com/store/apps/details?id=com.xizuth.ohmlawcalcu" target="_blanck">
-            <img src="assets/button_play.png" alt="play store download ohm law xizuth">
-        </a>
+        <div class="footer__description">
+            <div itemscope itemtype="http://schema.org/SoftwareApplication">
+                <span itemprop="name">Ohm's Law X</span> -
+                <span itemprop="operatingSystem">ANDROID</span> -
+                <link itemprop="applicationCategory" href="http://schema.org/SoftwareApplication" /> RATING:
+                <span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                    <span itemprop="ratingValue">5</span> (
+                    <span itemprop="ratingCount">100</span> ratings)
+                </span>
+                <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                    Price: $
+                    <span itemprop="price">0</span>
+                    <meta itemprop="priceCurrency" content="USD" />
+                </span>
+            </div>
+            <a href="https://play.google.com/store/apps/details?id=com.xizuth.ohmlawcalcu" target="_blanck">
+                <img src="assets/button_play.png" alt="play store download ohm law xizuth">
+            </a>
+        </div>
+        <div class="author" itemscope itemprop="Person" itemtype="http://schema.org/Person">
+            <span itemprop="name">
+                <a itemprop="url" href="https://alejandro-leyva.com" target="_blank">Alejandro Leyva</a>
+            </span> by
+            <span itemprop="sponsor" itemtype="http://schema.org/Organization">
+                <a itemprop="url" href="http://xizuth.com" target="_blank"> Xizuth Inc</a>
+            </span>
+        </div>
     </footer>
-    <script async src="js/main.js"></script>
+    <script async src="js/main-dist.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,3 @@
-
 const notation = {
     "nano": {
         "name": "n",
@@ -63,11 +62,13 @@ let calculateResistance = (voltage = 0.0, current = 0.0) => {
 
 let selectOption = (e) => {
 
+    console.dir(e);
+
     if (e.key === '-' || (e.key === '.')) {
         return;
     }
 
-
+    clearInput(e);
     focusInput(e);
 
     let optionSelected = e.target.parentElement;
@@ -76,25 +77,32 @@ let selectOption = (e) => {
     let option = items.indexOf(optionSelected);
 
     if (option === 0 || document.getElementById('voltage_option').checked) {
-        loadNameLabel(units.current.name, units.resistance.name);
-        loadListUnit(units.current.simbol,getListNotation().firstList);
-        loadListUnit(units.resistance.simbol,getListNotation().secondList);
+        if (!(e.type === 'change') && !(e.type === 'keyup')) {
+            loadNameLabel(units.current.name, units.resistance.name);
+            loadListUnit(units.current.simbol, getListNotation().firstList);
+            loadListUnit(units.resistance.simbol, getListNotation().secondList);
+        }
         setResutl(0);
     } else if (option === 1 || document.getElementById('current_option').checked) {
-        loadNameLabel(units.voltage.name, units.resistance.name);
-        loadListUnit(units.voltage.simbol,getListNotation().firstList);
-        loadListUnit(units.resistance.simbol,getListNotation().secondList);
+        if (!(e.type === 'change') && !(e.type === 'keyup')) {
+            loadNameLabel(units.voltage.name, units.resistance.name);
+            loadListUnit(units.voltage.simbol, getListNotation().firstList);
+            loadListUnit(units.resistance.simbol, getListNotation().secondList);
+        }
         setResutl(1);
     } else if (option === 2 || document.getElementById('resistance_option').checked) {
-        loadNameLabel(units.voltage.name, units.current.name);
-        loadListUnit(units.voltage.simbol,getListNotation().firstList);
-        loadListUnit(units.current.simbol,getListNotation().secondList);
+        if (!(e.type === 'change') && !(e.type === 'keyup')) {
+            loadNameLabel(units.voltage.name, units.current.name);
+            loadListUnit(units.voltage.simbol, getListNotation().firstList);
+            loadListUnit(units.current.simbol, getListNotation().secondList);
+        }
         setResutl(2);
     }
 
 }
 
 let focusInput = (e) => {
+
     let inputOne = document.getElementById('first_value_input');
     let inputSecond = document.getElementById('second_value_input');
     let listOne = document.getElementById('first_units_list');
@@ -108,6 +116,7 @@ let focusInput = (e) => {
         if (e.target.id === 'first_value_input') {
             inputSecond.focus();
             inputSecond.select();
+            option = 2;
         } else {
             inputOne.focus();
             inputOne.select();
@@ -115,27 +124,38 @@ let focusInput = (e) => {
         }
     }
 
-    if ((e.target.parentElement.id === 'container_inputs_one' && e.type === 'click') || option) {
+    if ((e.target.parentElement.id === 'container_inputs_one' && e.type === 'click') || option === 1) {
         inputOne.classList.add('focus_input_value');
         listOne.classList.add('focus_input_value');
         labelOne.classList.add('focus_label');
         inputSecond.classList.remove('focus_input_value');
         listSecond.classList.remove('focus_input_value');
         labelSecond.classList.remove('focus_label');
-    } else {
+    }
+    if ((e.target.parentElement.id === 'container_inputs_second' && e.type === 'click') || option === 2) {
         inputOne.classList.remove('focus_input_value');
         listOne.classList.remove('focus_input_value');
         labelOne.classList.remove('focus_label');
         inputSecond.classList.add('focus_input_value');
         listSecond.classList.add('focus_input_value');
         labelSecond.classList.add('focus_label');
-
     }
 
 }
 /** 
  * Methos
 */
+
+let clearInput = (e) => {
+    if (e.key === 'Escape') {
+        if (e.target.id === "first_value_input") {
+            e.target.value = "";
+        }
+        if (e.target.id === "second_value_input") {
+            e.target.value = "";
+        }
+    }
+}
 let loadNameLabel = (valueOne = '', valueTwo = '') => {
     let labelOne = document.getElementById('label_option_one');
     let labelTwo = document.getElementById('label_option_two');
@@ -147,21 +167,6 @@ let loadNameLabel = (valueOne = '', valueTwo = '') => {
 let setResutl = (option = 0) => {
     let valueOne = document.getElementById('first_value_input');
     let valueTwo = document.getElementById('second_value_input');
-
-    if (valueOne.value === '' || valueTwo.value === '') {
-
-        if (valueOne.validationMessage) {
-            alert(valueOne.validationMessage);
-            valueOne.select()
-        }
-
-        if (valueTwo.validationMessage) {
-            alert(valueTwo.validationMessage)
-            valueTwo.select();
-        }
-        return;
-    }
-
     let resultLabel = document.getElementById('result');
 
     let first = parseFloat(valueOne.value);
@@ -191,7 +196,6 @@ let setResutl = (option = 0) => {
         resultLabel.innerText = Infinity;
     } else {
         result = getResultWithNotation(result);
-
         resultLabel.innerText = `${formatNumber(result.value)} ${result.notation}${unit}`;
     }
 
@@ -240,9 +244,10 @@ let loadListUnit = (simbol, select) => {
 
     for (let index = 0; index < notation.allValues.length; index++) {
         let optionNew = document.createElement('option');
-        optionNew.innerText = notation.allValues[index]+simbol;
-        if(notation.allValues[index] === notation.unit.name){
-            optionNew.setAttribute('selected','')
+        optionNew.innerText = notation.allValues[index] + simbol;
+        if (notation.allValues[index] === notation.unit.name) {
+            optionNew.setAttribute('selected', '')
+            optionNew.setAttribute('translate', 'no')
         }
         select.add(optionNew)
     }
@@ -251,8 +256,8 @@ let loadListUnit = (simbol, select) => {
 }
 
 let removeAllOptions = (select) => {
-    
-    while(select.length !== 0){
+
+    while (select.length !== 0) {
         select.remove(0);
     }
 
@@ -260,6 +265,12 @@ let removeAllOptions = (select) => {
 }
 
 let getResultWithNotation = (value = 0.0) => {
+    if (value == 0) {
+        return {
+            value,
+            notation: ""
+        }
+    }
     let flag = false;
     let notationSelect = "";
     if (value < 0) {
@@ -267,29 +278,41 @@ let getResultWithNotation = (value = 0.0) => {
         flag = true;
     }
 
-    if (value < notation.nano.value) {
+    if (value < notation.micro.value) {
         value /= notation.nano.value;
         notationSelect += notation.nano.name;
+        console.log(notation.micro.value);
+
     }
     if (value >= notation.micro.value && value < notation.mili.value) {
         value /= notation.micro.value;
         notationSelect += notation.micro.name;
+        console.log('micro');
+
     }
     if (value >= notation.mili.value && value < notation.unit.value) {
         value /= notation.mili.value;
         notationSelect += notation.mili.name;
+        console.log('mili');
+
     }
     if (value >= notation.unit.value && value < notation.kilo.value) {
         value /= notation.unit.value;
         notationSelect += notation.unit.name;
+        console.log('unit');
+
     }
     if (value >= notation.kilo.value && value < notation.mega.value) {
         value /= notation.kilo.value;
         notationSelect += notation.kilo.name;
+        console.log('kilo');
+
     }
     if (value >= notation.mega.value) {
         value /= notation.mega.value;
         notationSelect += notation.mega.name;
+        console.log('mega');
+
     }
 
     if (flag) {
@@ -319,8 +342,8 @@ let getResultWithNotation = (value = 0.0) => {
     d.getElementById('container_inputs_second').addEventListener('click', focusInput)
 
     let listOne = d.getElementById('first_units_list');
-    listOne.addEventListener('change', (e) => {
-        selectOption();
-    });
+    listOne.addEventListener('change', selectOption);
+    let listTwo = d.getElementById('second_units_list');
+    listTwo.addEventListener('change', selectOption);
 
 })(document);
