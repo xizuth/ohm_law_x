@@ -20,7 +20,7 @@
     <link rel="apple-touch-icon" sizes="144x144" href="icon/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="icon/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="icon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="icon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="icon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
@@ -38,7 +38,8 @@
 <!-- TODO: twetter card-->
 <!-- TODO: agregar la imagen de la formula con una ventana encima-->
 <!-- TODO: agregar atributo de para no tradusca -->
-<!-- TODO: el punto cuando existe -->
+<!-- TODO: el punto decimal cuando no esta solito -->
+
 <body>
     <div class="main__container_body">
         <header id="header" class="header">
@@ -54,12 +55,12 @@
                         </label>
                     </li>
                     <li class="item_option">
-                        <input type="radio" id="current_option" class="radio_option" name="option" >
+                        <input type="radio" id="current_option" class="radio_option" name="option">
                         <label class="label_input_option" for="current_option" class="label-option">I
                         </label>
                     </li>
                     <li class="item_option">
-                        <input type="radio" id="resistance_option" class="radio_option" name="option" >
+                        <input type="radio" id="resistance_option" class="radio_option" name="option">
                         <label class="label_input_option" for="resistance_option" class="label-option">Ω
                         </label>
                     </li>
@@ -80,7 +81,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="container_values" >
+                <div class="container_values">
                     <label class="label_input " for="second_value_input" id="label_option_two">Resistance</label>
                     <div class="value-container" id="container_inputs_second">
                         <input type="number" id="second_value_input" class="input_value">
