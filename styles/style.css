@@ -9,7 +9,7 @@ body,
     box-sizing: border-box;
     --primary-dark-color: #D32F2F;
     --primary-color: #F44336;
-    --acent: #FFC107;
+    --acent: #FF6F00;
     --background: #eee;
     --font-white: white;
     --font-size: 1.4em;
@@ -90,6 +90,10 @@ outline: none;
     padding-left: .5em;
 }
 
+.label_input{
+    display: block;
+    font-size: 1.2rem;
+}
 .container_values {
     padding-top: 1rem;
 }
@@ -101,7 +105,7 @@ outline: none;
 .list_units,
 .input_value {
     font-size: 1.4rem;
-    border-radius: .8rem;
+    border-radius: .35rem;
     border: 1px solid var(--font-white);
 }
 
