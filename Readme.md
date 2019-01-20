@@ -2,10 +2,10 @@
 
 App wew for calculate ohm's law 
 
-Version <a href="https://play.google.com/store/apps/details?id=com.xizuth.ohmlawcalcu" target="_blank">Android</a> 
+Version [AppAndroid](https://play.google.com/store/apps/details?id=com.xizuth.ohmlawcalcu)
 
-Version [AppWeb](#)
+Version [AppWeb](https://ohmlawcalcu.firebaseapp.com/)
 
-> [by Xizuth Inc](http://xizuth.com/)
+> [by Xizuth Inc](https://xizuth.com/)
 
-![view](https://github.com/jalmx/ohm_law_x_app_web/raw/master/views/firts_view.png)
+![view](./screenshot/firts_view.png)

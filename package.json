@@ -1,0 +1,25 @@
+{
+  "name": "ohm_law_x_web",
+  "version": "1.0.0",
+  "description": "App wew for calculate ohm's law",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jalmx/ohm_law_x_app_web.git"
+  },
+  "keywords": [
+    "ohm",
+    "law",
+    "app",
+    "electronic"
+  ],
+  "author": "Xizuth",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jalmx/ohm_law_x_app_web/issues"
+  },
+  "homepage": "https://github.com/jalmx/ohm_law_x_app_web#readme"
+}
